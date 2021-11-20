@@ -5,41 +5,35 @@ import { clampDate, fullDate } from "../core/utility";
 import { Component_Icon_Like } from "../icons/icon_like";
 import { Component_Icon_Bookmark } from "../icons/icon_bookmark";
 
+import { storePost, POST_ACTS } from "../stores/store_post";
+
 export const Component_Post = lucid.component({
   attributes: function () {
     return {
-      username: "Berk Cambaz",
-      usertag: "berkcambaz",
-      date: new Date(),
-      content: "Hello, world!",
-      likeCount: 123,
-      liked: true,
-      bookmarked: true
+      post: undefined,
+      user: undefined
     };
   },
   methods: {
     getLongDate: function () {
-      return fullDate(this.attributes.date);
+      return fullDate(this.attributes.post.date);
     },
     getShortDate: function () {
-      return clampDate(this.attributes.date);
+      return clampDate(this.attributes.post.date);
     },
     getLikeClass: function () {
-      return this.attributes.liked ? "post__icon enabled" : "post__icon";
+      return this.attributes.post.liked ? "post__icon enabled" : "post__icon";
     },
     getBookmarkClass: function () {
-      return this.attributes.bookmarked ? "post__icon enabled" : "post__icon";
+      return this.attributes.post.bookmarked ? "post__icon enabled" : "post__icon";
     },
     like: function (ev) {
-      console.log(this);
-      this.attributes.liked = !this.attributes.liked;
-      if (this.attributes.liked) this.attributes.likeCount++;
-      else this.attributes.likeCount--;
+      storePost.commit(POST_ACTS.LIKE_POST, this.attributes.post);
       lucid.instance(Component_Icon_Like, this.key).attribute("class", this.methods.getLikeClass());
       this.setState();
     },
     bookmark: function (ev) {
-      this.attributes.bookmarked = !this.attributes.bookmarked;
+      storePost.commit(POST_ACTS.BOOKMARK_POST, this.attributes.post);
       lucid.instance(Component_Icon_Bookmark, this.key).attribute("class", this.methods.getBookmarkClass());
       this.setState();
     }
@@ -49,14 +43,14 @@ export const Component_Post = lucid.component({
       <div class="post">
         <div class="post__top">
           <div class="post__user-info">
-            <span class="post__username">{{attributes.username}}</span>
-            <span class="post__tag">@{{attributes.usertag}}</span>
+            <span class="post__username">{{attributes.user.username}}</span>
+            <span class="post__tag">@{{attributes.user.usertag}}</span>
           </div>
           <div class="post__date" title="{{methods.getLongDate}}">{{methods.getShortDate}}</div>
         </div>
-        <div class="post__content">{{attributes.content}}</div>
+        <div class="post__content">{{attributes.post.content}}</div>
         <div class="post__bottom" lucid-ref="bottom">
-          <div class="post__count">{{attributes.likeCount}}</div>
+          <div class="post__count">{{attributes.post.likeCount}}</div>
         </div>
       </div>
     `;

@@ -13,6 +13,7 @@ import { Component_Icon_Home } from "./icons/icon_home";
 import { Component_Icon_Search } from "./icons/icon_search";
 import { Component_Icon_User } from "./icons/icon_user";
 import { Component_Icon_Bookmark } from "./icons/icon_bookmark";
+import { storeUser } from "./stores/store_user";
 
 function getViewComponent(view) {
   switch (view) {
@@ -56,7 +57,7 @@ const Component_App = lucid.component({
       lucid.render(this.refs["bottom"], Component_Icon_User, "app",
         {
           class: "app__bottom__icon",
-          onclick: () => { superpage.to("/user/berk") }
+          onclick: () => { superpage.to("/user/" + storeUser.state.main.usertag) }
         }
       );
       lucid.render(this.refs["bottom"], Component_Icon_Bookmark, "app",
@@ -86,8 +87,8 @@ superpage.route("/search", function () {
   lucid.instance(Component_App, 0).attribute("currentPage", "search");
 });
 
-superpage.route("/user/([a-z0-9_]+)", function (username) {
-  lucid.instance(Component_App, 0).attribute("currentPage", "user", { username: username });
+superpage.route("/user/([a-z0-9_]+)", function (usertag) {
+  lucid.instance(Component_App, 0).attribute("currentPage", "user", { usertag: usertag });
 });
 
 superpage.route("/bookmarks", function () {

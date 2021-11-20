@@ -3,11 +3,11 @@ import { lucid } from "../lucid.js";
 import { Component_Icon_Send } from "../icons/icon_send";
 
 export const Component_PostInput = lucid.component({
-  state: function () {
-    return { length: 0 };
-  },
   attributes: function () {
     return { limit: 256 };
+  },
+  state: function () {
+    return { length: 0 };
   },
   methods: {
     oninput: function (ev) {

@@ -5,6 +5,9 @@ import { Luckt } from "../luckt";
 import { Component_Post } from "../components/post";
 import { Component_PostInput } from "../components/post-input";
 
+import { storePost, POST_GETTERS } from "../stores/store_post";
+import { storeUser, USER_GETTERS } from "../stores/store_user";
+
 export const Component_View_Home = lucid.component({
   render: function () {
     return `<div></div>`;
@@ -13,8 +16,15 @@ export const Component_View_Home = lucid.component({
     connected: function () {
       lucid.render(this.dom, Component_PostInput, 0);
 
-      for (let i = 0; i < 10; ++i)
-        lucid.render(this.dom, Component_Post, i);
+      const posts = storePost.getters[POST_GETTERS.NORMAL];
+      for (let i = 0; i < posts.length; ++i) {
+        lucid.render(this.dom, Component_Post, posts.postId,
+          {
+            post: posts[i],
+            user: storeUser.getters[USER_GETTERS.GET_USER](posts[i].userId)
+          }
+        );
+      }
     }
   }
 });
