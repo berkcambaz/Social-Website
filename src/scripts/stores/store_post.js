@@ -3,6 +3,7 @@ import { Luckt } from "../luckt";
 import { storeUser } from "./store_user";
 
 export const POST_ACTS = {
+  POST_POST: "postpost",
   GET_POSTS: "getposts",
   LIKE_POST: "likepost",
   BOOKMARK_POST: "bookmarkpost"
@@ -33,8 +34,11 @@ export const storePost = new Luckt({
     ]
   },
   acts: {
+    [POST_ACTS.POST_POST]: function (state, content) {
+      // TODO: Send to server via sage
+    },
     [POST_ACTS.GET_POSTS]: function (state) {
-      // TODO: Implement
+      // TODO: Send to server via sage
     },
     [POST_ACTS.LIKE_POST]: function (state, post) {
       post.liked = !post.liked;
@@ -49,7 +53,7 @@ export const storePost = new Luckt({
   },
   futures: {
     [POST_FUTURES.GET_POSTS]: function (commit) {
-      // TODO: Implement
+      // TODO: Send to server via sage
     }
   },
   getters: {

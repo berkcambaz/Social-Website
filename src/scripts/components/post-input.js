@@ -2,6 +2,8 @@ import { lucid } from "../lucid.js";
 
 import { Component_Icon_Send } from "../icons/icon_send";
 
+import { storePost, POST_ACTS } from "../stores/store_post";
+
 export const Component_PostInput = lucid.component({
   attributes: function () {
     return { limit: 256 };
@@ -22,6 +24,9 @@ export const Component_PostInput = lucid.component({
 
       // If text is empty, don't do anything
       if (element.value.length === 0) return;
+
+      // Commit to the store with the content of the post
+      storePost.commit(POST_ACTS.POST_POST, element.value);
 
       element.value = "";
       element.style.height = "0px";

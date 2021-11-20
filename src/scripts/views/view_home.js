@@ -18,7 +18,7 @@ export const Component_View_Home = lucid.component({
 
       const posts = storePost.getters[POST_GETTERS.NORMAL];
       for (let i = 0; i < posts.length; ++i) {
-        lucid.render(this.dom, Component_Post, posts.postId,
+        lucid.render(this.dom, Component_Post, posts[i].postId,
           {
             post: posts[i],
             user: storeUser.getters[USER_GETTERS.GET_USER](posts[i].userId)

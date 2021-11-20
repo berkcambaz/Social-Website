@@ -2,6 +2,7 @@ import { lucid } from "../lucid";
 import { superpage } from "../superpage";
 import { Luckt } from "../luckt";
 
+import { Component_User } from "../components/user";
 import { Component_Post } from "../components/post";
 
 import { storePost, POST_GETTERS } from "../stores/store_post";
@@ -13,10 +14,11 @@ export const Component_View_User = lucid.component({
   },
   hooks: {
     connected: function () {
+      lucid.render(this.dom, Component_User, 0);
 
       const posts = storePost.getters[POST_GETTERS.OWN];
       for (let i = 0; i < posts.length; ++i) {
-        lucid.render(this.dom, Component_Post, posts.postId,
+        lucid.render(this.dom, Component_Post, posts[i].postId,
           {
             post: posts[i],
             user: storeUser.getters[USER_GETTERS.GET_USER](posts[i].userId)
