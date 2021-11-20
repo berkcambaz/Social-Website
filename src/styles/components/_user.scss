@@ -1,0 +1,35 @@
+@use "../abstracts/mixins";
+
+.user {
+  padding-top: 20px;
+
+  .user__username {
+    font-size: 18px;
+  }
+
+  .user__usertag { 
+    font-size: 14px;
+  }
+
+  .user__date {
+    display: flex;
+    align-items: center;
+    margin-left: -5px;
+  }
+
+  .user__followers {
+    @include hover_bottom();
+
+    display: inline-block;
+    padding-right: 5px;
+    cursor: pointer;
+  }
+
+  .user__following {
+    @include hover_bottom();
+
+    display: inline-block;
+    padding-left: 5px;
+    cursor: pointer;
+  }
+}

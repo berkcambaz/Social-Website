@@ -5,3 +5,10 @@
   -khtml-user-select: none; 
   -ms-user-select: none; 
 }
+
+@mixin hover_bottom {
+  &:hover {
+    border-bottom: 1px solid #000000;
+    margin-bottom: -1px;
+  }
+} 

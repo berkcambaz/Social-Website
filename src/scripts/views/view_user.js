@@ -14,7 +14,7 @@ export const Component_View_User = lucid.component({
   },
   hooks: {
     connected: function () {
-      lucid.render(this.dom, Component_User, 0);
+      lucid.render(this.dom, Component_User, 0, { user: storeUser.state.main });
 
       const posts = storePost.getters[POST_GETTERS.OWN];
       for (let i = 0; i < posts.length; ++i) {

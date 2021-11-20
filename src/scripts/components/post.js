@@ -1,4 +1,5 @@
 import { lucid } from "../lucid";
+import { superpage } from "../superpage";
 
 import { clampDate, fullDate } from "../core/utility";
 
@@ -36,13 +37,16 @@ export const Component_Post = lucid.component({
       storePost.commit(POST_ACTS.BOOKMARK_POST, this.attributes.post);
       lucid.instance(Component_Icon_Bookmark, this.key).attribute("class", this.methods.getBookmarkClass());
       this.setState();
+    },
+    gotoProfile: function (ev) {
+      superpage.to("/user/" + this.attributes.user.usertag);
     }
   },
   render: function () {
     return `
       <div class="post">
         <div class="post__top">
-          <div class="post__user-info">
+          <div class="post__user-info" onclick="{{methods.gotoProfile}}">
             <span class="post__username">{{attributes.user.username}}</span>
             <span class="post__tag">@{{attributes.user.usertag}}</span>
           </div>

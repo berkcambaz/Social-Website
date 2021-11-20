@@ -1,9 +1,4 @@
-@mixin hover_bottom {
-  &:hover {
-    border-bottom: 1px solid #000000;
-    margin-bottom: -1px;
-  }
-} 
+@use "../abstracts/mixins";
 
 .post {
   padding: 20px 0;
@@ -29,8 +24,6 @@
   }
 
   .post__date {
-    @include hover_bottom();
-    
     display: inline-block;
   }
 

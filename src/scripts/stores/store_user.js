@@ -13,7 +13,7 @@ export const storeUser = new Luckt({
       bio: "CMON INGERLAND SCOR SOM FOKIN GOALS",
       date: new Date(),
       followers: 123,
-      following: 123
+      following: 456
     },
     users: []
   },
