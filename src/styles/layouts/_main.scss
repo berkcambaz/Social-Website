@@ -22,6 +22,13 @@
 
   .app__top {
     @include bar(false);
+
+    .app__top__title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 31px;
+    }
   }
 
   .app__content {

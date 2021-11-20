@@ -80,7 +80,7 @@ export const storePost = new Luckt({
       return sortByDate(filterByUserId(userId, state.posts));
     },
     [POST_GETTERS.BOOKMARKED]: function (state) {
-      return sortByDate(filterByBookmarked(filterByUserId(storeUser.state.main.id, state.posts)))
+      return sortByDate(filterByBookmarked(state.posts))
     },
   }
 });

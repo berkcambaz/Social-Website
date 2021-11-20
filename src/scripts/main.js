@@ -47,6 +47,7 @@ const Component_App = lucid.component({
     return `
       <div>
         <div class="app__top" lucid-ref="top">
+          <div class="app__top__title">tivittırı</div>
         </div>
         <div class="app__content" lucid-ref="content">
         </div>
