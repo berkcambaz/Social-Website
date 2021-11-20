@@ -16,7 +16,7 @@ export const POST_FUTURES = {
 export const POST_GETTERS = {
   NORMAL: "normal",
   BOOKMARKED: "bookmarked",
-  OWN: "own"
+  USER: "user"
 }
 
 export const storePost = new Luckt({
@@ -27,7 +27,23 @@ export const storePost = new Luckt({
         postId: 0,
         date: new Date(),
         content: "Hello, world!",
-        likeCount: 123,
+        likeCount: 9631,
+        liked: true,
+        bookmarked: true
+      }, {
+        userId: 1,
+        postId: 1,
+        date: new Date(),
+        content: "bir otodidakt olarak, okul sistemiyle olan savaşımdan vazgeçiyorum. bundan sonra felsefe, ekonomi, bilgisayar bilimi, sanat gibi konular dışında anlamsız bir çaba göstermeyeceğim.",
+        likeCount: 3169,
+        liked: true,
+        bookmarked: true
+      }, {
+        userId: 2,
+        postId: 2,
+        date: new Date(),
+        content: "Ömrümmmmm senin ağzını yüzünü yerim ben demek yerine hayatımdaki tüm detayları falan anlatıyorum iste ben de",
+        likeCount: 4200,
         liked: true,
         bookmarked: true
       }
@@ -60,8 +76,8 @@ export const storePost = new Luckt({
     [POST_GETTERS.NORMAL]: function (state) {
       return sortByDate(state.posts);
     },
-    [POST_GETTERS.OWN]: function (state) {
-      return sortByDate(filterByUserId(storeUser.state.main.id, state.posts));
+    [POST_GETTERS.USER]: (state) => (userId) => {
+      return sortByDate(filterByUserId(userId, state.posts));
     },
     [POST_GETTERS.BOOKMARKED]: function (state) {
       return sortByDate(filterByBookmarked(filterByUserId(storeUser.state.main.id, state.posts)))

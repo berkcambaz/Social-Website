@@ -4,6 +4,9 @@ import { Luckt } from "./luckt";
 
 import "../styles/styles.scss";
 
+import { Component_View_Login } from "./views/view_login";
+import { Component_View_Signup } from "./views/view_signup";
+
 import { Component_View_Home } from "./views/view_home";
 import { Component_View_Search } from "./views/view_search";
 import { Component_View_User } from "./views/view_user";
@@ -21,6 +24,8 @@ function getViewComponent(view) {
     case "search": return Component_View_Search;
     case "user": return Component_View_User;
     case "bookmarks": return Component_View_Bookmarks;
+    case "login": return Component_View_Login;
+    case "signup": return Component_View_Signup;
   }
 }
 
@@ -30,12 +35,13 @@ function getViewIcon(view) {
     case "search": return Component_Icon_Search;
     case "user": return Component_Icon_User;
     case "bookmarks": return Component_Icon_Bookmark;
+    default: return undefined;
   }
 }
 
 const Component_App = lucid.component({
   attributes: function () {
-    return { currentPage: undefined };
+    return { currentPage: undefined, args: undefined };
   },
   render: function () {
     return `
@@ -81,16 +87,26 @@ const Component_App = lucid.component({
     currentPage: function (oldPage, newPage) {
       if (oldPage) {
         lucid.remove(getViewComponent(oldPage), 0);
-        lucid.instance(getViewIcon(oldPage), "app").attribute("class", "app__bottom__icon");
+        if (getViewIcon(oldPage))
+          lucid.instance(getViewIcon(oldPage), "app").attribute("class", "app__bottom__icon");
       }
-      lucid.render(this.refs["content"], getViewComponent(newPage), 0);
-      lucid.instance(getViewIcon(newPage), "app").attribute("class", "app__bottom__icon enabled");
+      lucid.render(this.refs["content"], getViewComponent(newPage), 0, { args: this.attributes.args });
+      if (getViewIcon(newPage))
+        lucid.instance(getViewIcon(newPage), "app").attribute("class", "app__bottom__icon enabled");
     }
   }
 });
 
 superpage.redirect("/", "/home");
 superpage.fallback(function () { console.log("Route was not found."); });
+
+superpage.route("/login", function () {
+  lucid.instance(Component_App, 0).attribute("currentPage", "login");
+});
+
+superpage.route("/signup", function () {
+  lucid.instance(Component_App, 0).attribute("currentPage", "signup");
+});
 
 superpage.route("/home", function () {
   lucid.instance(Component_App, 0).attribute("currentPage", "home");
@@ -101,7 +117,8 @@ superpage.route("/search", function () {
 });
 
 superpage.route("/user/([a-z0-9_]+)", function (usertag) {
-  lucid.instance(Component_App, 0).attribute("currentPage", "user", { usertag: usertag });
+  lucid.instance(Component_App, 0).attribute("args", usertag);
+  lucid.instance(Component_App, 0).attribute("currentPage", "user");
 });
 
 superpage.route("/bookmarks", function () {

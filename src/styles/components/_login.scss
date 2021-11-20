@@ -1,0 +1,22 @@
+@use "../abstracts/mixins";
+
+.login {
+  @include authorization_container();
+
+  .login__input {
+    @include default_input();
+  }
+
+  .login__button {
+    @include authorization_button();
+    margin-bottom: 10px;
+  }
+
+  .login__text {
+    @include authorization_text();
+  }
+  
+  :nth-child(2) {
+    margin: 10px 0;
+  }
+}

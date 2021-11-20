@@ -1,0 +1,21 @@
+@use "../abstracts/mixins";
+
+.signup {
+  @include authorization_container();
+
+  .signup__input {
+    @include default_input();
+  }
+
+  .signup__button {
+    @include authorization_button();
+  }
+
+  .signup__text {
+    @include authorization_text();
+  }
+  
+  :nth-child(even) {
+    margin: 10px 0;
+  }
+}

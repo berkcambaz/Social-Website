@@ -1,7 +1,7 @@
 import { lucid } from "../lucid";
 import { superpage } from "../superpage";
 
-import { clampDate, fullDate } from "../core/utility";
+import { clampDate, fullDate, clampNumber } from "../core/utility";
 
 import { Component_Icon_Like } from "../icons/icon_like";
 import { Component_Icon_Bookmark } from "../icons/icon_bookmark";
@@ -21,6 +21,9 @@ export const Component_Post = lucid.component({
     },
     getShortDate: function () {
       return clampDate(this.attributes.post.date);
+    },
+    getLikeCount: function () {
+      return clampNumber(this.attributes.post.likeCount);
     },
     getLikeClass: function () {
       return this.attributes.post.liked ? "post__icon enabled" : "post__icon";
@@ -54,7 +57,7 @@ export const Component_Post = lucid.component({
         </div>
         <div class="post__content">{{attributes.post.content}}</div>
         <div class="post__bottom" lucid-ref="bottom">
-          <div class="post__count">{{attributes.post.likeCount}}</div>
+          <div class="post__count" title="{{attributes.post.likeCount}} likes">{{methods.getLikeCount}}</div>
         </div>
       </div>
     `;

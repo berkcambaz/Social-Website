@@ -21,7 +21,7 @@ export const Component_View_Home = lucid.component({
         lucid.render(this.dom, Component_Post, posts[i].postId,
           {
             post: posts[i],
-            user: storeUser.getters[USER_GETTERS.GET_USER](posts[i].userId)
+            user: storeUser.getters[USER_GETTERS.GET_USER_BY_ID](posts[i].userId)
           }
         );
       }
