@@ -1,0 +1,44 @@
+@mixin bar($bottom) {
+  position: fixed;
+  height: 50px;
+  width: 640px;
+  
+  background-color: #ffffff;
+
+  @if $bottom {
+    bottom: 0;
+    border-top: 1px solid #000000;
+  } @else {
+    top: 0;
+    border-bottom: 1px solid #000000;
+  }
+
+  @media screen and (max-width: 640px) {
+    width: 100%;
+  }
+}
+
+#app {
+
+  .app__top {
+    @include bar(false);
+  }
+
+  .app__content {
+    margin: 50px 0;
+    padding: 0 25px;
+  }
+
+  .app__bottom {
+    @include bar(true);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .app__bottom__icon {
+      cursor: pointer;
+    }
+  }
+
+}

@@ -1,0 +1,12 @@
+@use "../abstracts/variables";
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  outline: 0;
+
+  max-width: 640px;
+  overflow-y: scroll;
+
+  font-family: $font;
+}

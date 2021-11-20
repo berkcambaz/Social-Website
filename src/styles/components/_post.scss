@@ -1,0 +1,64 @@
+@mixin hover_bottom {
+  &:hover {
+    border-bottom: 1px solid #000000;
+    margin-bottom: -1px;
+  }
+} 
+
+.post {
+  padding: 20px 0;
+  
+  .post__top {
+
+  }
+
+  .post__user-info {
+    @include hover_bottom();
+
+    display: inline-block;
+    
+    cursor: pointer;
+  }
+
+  .post__username {
+    
+  }
+
+  .post__tag {
+    margin: 0 5px;
+  }
+
+  .post__date {
+    @include hover_bottom();
+    
+    display: inline-block;
+  }
+
+  .post__content {
+    margin: 5px 10px;
+  }
+
+  .post__bottom {
+    display: flex;
+    align-items: center;
+
+    padding: 0 10px;
+  }
+
+  .post__count {
+    display: inline-block;
+
+    margin-right: 5px;
+  }
+
+  .post__icon {
+    display: inline-block;
+
+    cursor: pointer;
+  }
+
+  .post__icon.enabled {
+    fill: #000000;
+  }
+
+}

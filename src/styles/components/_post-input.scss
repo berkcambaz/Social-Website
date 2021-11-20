@@ -1,0 +1,39 @@
+@use "../abstracts/variables";
+
+.post-input {
+  padding-top: 20px;
+
+  .post-input__textarea {
+    overflow-wrap: break-word;
+    font-size: 16px;
+    font-family: $font;
+
+    resize: none;
+    outline: 0;
+    border: 0;
+    padding: 0;
+    
+    border-bottom: 1px solid #000000;
+    padding-bottom: 1px;
+
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .post-input__bottom {
+    display: flex;
+    align-items: center;
+  }
+
+  .post-input__icon {
+    width: 28px;
+    height: 28px;
+
+    cursor: pointer;
+  }
+
+  .post-input__text-length {
+    margin-left: 5px;
+  }
+
+}
