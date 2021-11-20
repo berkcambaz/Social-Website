@@ -24,6 +24,15 @@ function getViewComponent(view) {
   }
 }
 
+function getViewIcon(view) {
+  switch (view) {
+    case "home": return Component_Icon_Home;
+    case "search": return Component_Icon_Search;
+    case "user": return Component_Icon_User;
+    case "bookmarks": return Component_Icon_Bookmark;
+  }
+}
+
 const Component_App = lucid.component({
   attributes: function () {
     return { currentPage: undefined };
@@ -70,8 +79,12 @@ const Component_App = lucid.component({
   },
   watch: {
     currentPage: function (oldPage, newPage) {
-      if (oldPage) lucid.remove(getViewComponent(oldPage), 0);
+      if (oldPage) {
+        lucid.remove(getViewComponent(oldPage), 0);
+        lucid.instance(getViewIcon(oldPage), "app").attribute("class", "app__bottom__icon");
+      }
       lucid.render(this.refs["content"], getViewComponent(newPage), 0);
+      lucid.instance(getViewIcon(newPage), "app").attribute("class", "app__bottom__icon enabled");
     }
   }
 });

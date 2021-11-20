@@ -39,6 +39,10 @@
     .app__bottom__icon {
       cursor: pointer;
     }
+
+    .app__bottom__icon.enabled {
+      stroke-width: 2px;
+    }
   }
 
 }
