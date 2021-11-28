@@ -4,6 +4,9 @@ import { Luckt } from "./luckt";
 
 import "../styles/styles.scss";
 
+
+import { Component_View_Menu } from "./views/view_menu";
+
 import { Component_View_Login } from "./views/view_login";
 import { Component_View_Signup } from "./views/view_signup";
 
@@ -12,10 +15,12 @@ import { Component_View_Search } from "./views/view_search";
 import { Component_View_User } from "./views/view_user";
 import { Component_View_Bookmarks } from "./views/view_bookmarks";
 
+import { Component_Icon_Menu } from "./icons/icon_menu";
 import { Component_Icon_Home } from "./icons/icon_home";
 import { Component_Icon_Search } from "./icons/icon_search";
 import { Component_Icon_User } from "./icons/icon_user";
 import { Component_Icon_Bookmark } from "./icons/icon_bookmark";
+
 import { storeUser } from "./stores/store_user";
 
 function getViewComponent(view) {
@@ -40,6 +45,7 @@ function getViewIcon(view) {
 }
 
 const Component_App = lucid.component({
+  state: function () { return { settingsShown: false } },
   attributes: function () {
     return { currentPage: undefined, args: undefined };
   },
@@ -58,6 +64,18 @@ const Component_App = lucid.component({
   },
   hooks: {
     connected: function () {
+      lucid.render(this.refs["top"], Component_Icon_Menu, "app",
+        {
+          class: "app__top__icon",
+          onclick: () => {
+            if (lucid.instance(Component_View_Menu, "app") === undefined)
+              lucid.render(this.dom, Component_View_Menu, "app");
+            else
+              lucid.instance(Component_View_Menu, "app").attribute("class", "swap");
+          }
+        }
+      );
+
       lucid.render(this.refs["bottom"], Component_Icon_Home, "app",
         {
           class: "app__bottom__icon",
